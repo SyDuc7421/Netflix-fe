@@ -10,6 +10,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Info, Key, LogIn, Mail } from "lucide-react";
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -38,9 +39,18 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="z-50 h-fit mt-[150px] min-w-[360px] space-y-6 p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
+          className="z-50 h-fit mt-[150px] min-w-[400px] space-y-6 p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
         >
-          <h2 className="text-white font-semibold text-3xl">Sign in</h2>
+          <div className="space-y-2">
+            <h2 className="text-white font-semibold text-3xl flex items-center gap-2">
+              <LogIn size={30} className="mr-1 -ml-1" />
+              Sign in
+            </h2>
+            <p className="text-sm text-zinc-400 flex items-center gap-1">
+              <Info size={14} strokeWidth={1} />
+              Provide your details below to log in
+            </p>
+          </div>
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -48,12 +58,18 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="email"
-                      className="bg-zinc-400"
-                      placeholder="Email"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type="email"
+                        className="bg-zinc-400 ps-6"
+                        placeholder="Email"
+                        {...field}
+                      />
+                      <Mail
+                        size={16}
+                        className="absolute left-1 top-2.5 stroke-[1.5px] text-zinc-600"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -65,12 +81,18 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="password"
-                      className="bg-zinc-400"
-                      placeholder="Password"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type="password"
+                        className="bg-zinc-400 ps-6"
+                        placeholder="Password"
+                        {...field}
+                      />
+                      <Key
+                        size={16}
+                        className="absolute left-1 top-2.5 stroke-[1.5px] text-zinc-600"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -83,7 +105,7 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
           >
             Login
           </Button>
-          <p className="text-xs text-slate-500">
+          <p className="text-sm text-zinc-400">
             First time using Netflix,{" "}
             <button
               type="button"

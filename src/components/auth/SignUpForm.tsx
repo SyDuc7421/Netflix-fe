@@ -10,6 +10,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Info, Key, Mail, User, UserRoundPlus } from "lucide-react";
 
 const schema = z.object({
   username: z.string().min(6, {
@@ -41,9 +42,19 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="z-50 h-fit mt-[150px] min-w-[360px] space-y-[30px] p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
+          className="z-50 h-fit mt-[150px] min-w-[400px] space-y-[30px] p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
         >
-          <h2 className="text-white font-semibold text-3xl">Sign up</h2>
+          <div className="space-y-2">
+            <h2 className="text-white font-semibold text-3xl flex items-center gap-2">
+              <UserRoundPlus size={30} />
+              Sign up
+            </h2>
+            <p className="text-sm text-zinc-400 flex items-baseline gap-1 text-wrap w-[360px]">
+              <Info size={14} strokeWidth={1} />
+              Provide the most accurate information fields for account
+              registration
+            </p>
+          </div>
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -51,12 +62,18 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="text"
-                      className="bg-zinc-400"
-                      placeholder="Username"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type="text"
+                        className="bg-zinc-400 ps-6"
+                        placeholder="Username"
+                        {...field}
+                      />
+                      <User
+                        size={16}
+                        className="absolute left-1 top-2.5 stroke-[1.5px] text-zinc-600"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -68,12 +85,18 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="email"
-                      className="bg-zinc-400"
-                      placeholder="Email"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type="email"
+                        className="bg-zinc-400 ps-6"
+                        placeholder="Email"
+                        {...field}
+                      />
+                      <Mail
+                        size={16}
+                        className="absolute left-1 top-2.5 stroke-[1.5px] text-zinc-600"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -85,12 +108,18 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="password"
-                      className="bg-zinc-400"
-                      placeholder="Password"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type="password"
+                        className="bg-zinc-400 ps-6"
+                        placeholder="Password"
+                        {...field}
+                      />
+                      <Key
+                        size={16}
+                        className="absolute left-1 top-2.5 stroke-[1.5px] text-zinc-600"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -103,7 +132,7 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
           >
             Register
           </Button>
-          <p className="text-xs text-slate-500">
+          <p className="text-sm text-slate-400">
             Already have an account,{" "}
             <button
               type="button"

@@ -10,12 +10,16 @@ export interface AuthState {
   refreshToken: string;
 }
 
-const initialState: AuthState = {
+const stored = localStorage.getItem(AUTH_SLICE_STORE_KEY);
+let initialState: AuthState = {
   username: "",
   email: "",
   accessToken: "",
   refreshToken: "",
 };
+if (stored) {
+  initialState = JSON.parse(stored);
+}
 
 export const authSlice = createSlice({
   name: "auth",

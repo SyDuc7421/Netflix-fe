@@ -7,6 +7,7 @@ import {
 import { RootLayout } from "./layouts/RootLayout";
 import AuthPage from "./pages/Auth";
 import HomePage from "./pages/HomePage";
+import { Toaster } from "./components/ui/sonner";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster />
+    </>
+  );
 }
 
 export default App;

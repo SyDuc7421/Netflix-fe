@@ -11,6 +11,8 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Info, Key, Mail, User, UserRoundPlus } from "lucide-react";
+import { signup } from "../../services/authService";
+import { toast } from "sonner";
 
 const schema = z.object({
   username: z.string().min(6, {
@@ -39,8 +41,16 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof schema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const response = await signup(values);
+    if (response && response.status === 201) {
+      toast.success("Account registration successfully.");
+      setIsLogin(true); // Move to sign in form
+    } else {
+      toast.error("Account registration failed", {
+        description: response.message,
+      });
+    }
   };
   return (
     <>

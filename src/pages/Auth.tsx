@@ -5,6 +5,7 @@ import { SignUpForm } from "../components/auth/SignUpForm";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+
   return (
     <div className="relative h-screen w-screen flex item-center justify-center bg-[url('/src/assets/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
       <NavBar />

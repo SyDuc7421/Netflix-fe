@@ -11,6 +11,9 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Info, Key, LogIn, Mail } from "lucide-react";
+import { signin } from "../../services/authService";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -27,6 +30,8 @@ interface SignInFormProps {
 }
 
 export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     values: {
@@ -35,8 +40,17 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof schema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const response = await signin(values);
+    if (response.status === 200) {
+      // TODO: Save data to state redux
+      toast.success("Logged in successfully");
+      navigate("/homepage");
+    } else {
+      toast.error("Login failed", {
+        description: response.message,
+      });
+    }
   };
   return (
     <>

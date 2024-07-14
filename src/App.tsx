@@ -8,6 +8,8 @@ import { RootLayout } from "./layouts/RootLayout";
 import AuthPage from "./pages/Auth";
 import HomePage from "./pages/HomePage";
 import { Toaster } from "./components/ui/sonner";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +35,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
-      <Toaster />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <Toaster />
+      </Provider>
     </>
   );
 }

@@ -29,6 +29,10 @@ interface SignInFormProps {
 export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
+    values: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = (values: z.infer<typeof schema>) => {

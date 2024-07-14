@@ -1,7 +1,12 @@
-import { AuthPage } from "./pages/Auth";
-import { HomePage } from "./pages/HomePage";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RootLayout } from "./layouts/RootLayout";
+import AuthPage from "./pages/Auth";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +14,18 @@ const router = createBrowserRouter([
     element: <AuthPage />,
   },
   {
-    index: true,
-    element: <HomePage />,
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        path: "*",
+        element: <Navigate to={"/homepage"} />,
+      },
+      {
+        path: "homepage",
+        element: <HomePage />,
+      },
+    ],
   },
 ]);
 

@@ -7,11 +7,11 @@ export const AuthLayout = () => {
 
   if (!isAutheticated) {
     return (
-      <div className="w-screen h-screen">
+      <div className="h-screen w-screen">
         <Outlet />
       </div>
     );
   } else {
-    return <Navigate to="/homepage" replace />;
+    return <Navigate to="/choosing-account" replace />;
   }
 };

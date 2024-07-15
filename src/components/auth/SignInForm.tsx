@@ -10,10 +10,9 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 import { Info, Key, LogIn, Mail } from "lucide-react";
 import { signin } from "../../services/authService";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { add } from "../../store/authSlice";
 
@@ -32,7 +31,6 @@ interface SignInFormProps {
 }
 
 export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof schema>>({
@@ -48,7 +46,6 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
     if (response.status === 200) {
       dispatch(add(response.data));
       toast.success("Logged in successfully");
-      navigate("/homepage");
     } else {
       toast.error("Login failed", {
         description: response.message,
@@ -60,14 +57,14 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="z-50 h-fit mt-[150px] min-w-[400px] space-y-6 p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
+          className="z-50 mt-[150px] h-fit min-w-[400px] space-y-6 rounded-sm bg-primary p-8 text-primary-foreground placeholder-opacity-95"
         >
           <div className="space-y-2">
-            <h2 className="text-white font-semibold text-3xl flex items-center gap-2">
-              <LogIn size={30} className="mr-1 -ml-1" />
+            <h2 className="flex items-center gap-2 text-3xl font-semibold text-white">
+              <LogIn size={30} className="-ml-1 mr-1" />
               Sign in
             </h2>
-            <p className="text-sm text-zinc-400 flex items-center gap-1">
+            <p className="flex items-center gap-1 text-sm text-zinc-400">
               <Info size={14} strokeWidth={1} />
               Provide your details below to log in
             </p>
@@ -130,7 +127,7 @@ export const SignInForm = ({ setIsLogin }: SignInFormProps) => {
             First time using Netflix,{" "}
             <button
               type="button"
-              className="underline text-white cursor-pointer"
+              className="cursor-pointer text-white underline"
               onClick={() => setIsLogin(false)}
             >
               Create an account

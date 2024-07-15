@@ -16,15 +16,15 @@ import { toast } from "sonner";
 
 const schema = z.object({
   username: z.string().min(6, {
-    message: "Username must be at least 6 characters",
+    message: "Username must be at least 6 characters.",
   }),
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string().email({ message: "Invalid email address." }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/[0-9]/, "Password must contain at least one number"),
+    .min(8, { message: "Password must be at least 8 characters." })
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter.")
+    .regex(/[0-9]/, "Password must contain at least one number."),
 });
 
 interface SignUpFormProps {
@@ -57,14 +57,14 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="z-50 h-fit mt-[150px] min-w-[400px] space-y-[30px] p-8 bg-primary text-primary-foreground placeholder-opacity-95 rounded-sm"
+          className="z-50 mt-[150px] h-fit min-w-[400px] space-y-[30px] rounded-sm bg-primary p-8 text-primary-foreground placeholder-opacity-95"
         >
           <div className="space-y-2">
-            <h2 className="text-white font-semibold text-3xl flex items-center gap-2">
+            <h2 className="flex items-center gap-2 text-3xl font-semibold text-white">
               <UserRoundPlus size={30} />
               Sign up
             </h2>
-            <p className="text-sm text-zinc-400 flex items-baseline gap-1 text-wrap w-[360px]">
+            <p className="flex w-[360px] items-baseline gap-1 text-wrap text-sm text-zinc-400">
               <Info size={14} strokeWidth={1} />
               Provide the most accurate information fields for account
               registration
@@ -151,7 +151,7 @@ export const SignUpForm = ({ setIsLogin }: SignUpFormProps) => {
             Already have an account,{" "}
             <button
               type="button"
-              className="underline text-white cursor-pointer"
+              className="cursor-pointer text-white underline"
               onClick={() => setIsLogin(true)}
             >
               Sign in now

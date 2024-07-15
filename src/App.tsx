@@ -3,14 +3,17 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-
-import { RootLayout } from "./layouts/RootLayout";
-import AuthPage from "./pages/Auth";
-import HomePage from "./pages/HomePage";
-import { Toaster } from "./components/ui/sonner";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+
+import AuthPage from "./pages/Auth";
+import HomePage from "./pages/HomePage";
+import ChooseAccountPage from "./pages/ChooseAccount";
+
+import { RootLayout } from "./layouts/RootLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
+
+import { Toaster } from "./components/ui/sonner";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "homepage",
         element: <HomePage />,
+      },
+      {
+        path: "choosing-account",
+        element: <ChooseAccountPage />,
       },
     ],
   },

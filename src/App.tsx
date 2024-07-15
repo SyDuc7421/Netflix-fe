@@ -10,11 +10,18 @@ import HomePage from "./pages/HomePage";
 import { Toaster } from "./components/ui/sonner";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { AuthLayout } from "./layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
     path: "/auth",
-    element: <AuthPage />,
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <AuthPage />,
+      },
+    ],
   },
   {
     path: "/",

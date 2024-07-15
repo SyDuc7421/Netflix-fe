@@ -56,10 +56,13 @@ export const authSlice = createSlice({
         })
       );
     },
+    refresh: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { add, remove } = authSlice.actions;
+export const { add, remove, refresh } = authSlice.actions;
 
 export default authSlice.reducer;

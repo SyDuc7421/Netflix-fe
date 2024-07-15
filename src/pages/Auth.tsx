@@ -7,7 +7,7 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="relative h-screen w-screen flex item-center justify-center bg-[url('/src/assets/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
+    <div className="relative h-full w-full flex item-center justify-center bg-[url('/src/assets/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
       <NavBar />
 
       {/* conditional render form */}

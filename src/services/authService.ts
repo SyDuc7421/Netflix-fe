@@ -65,3 +65,19 @@ export const signup = async (data: signUpRequestProps) => {
   );
   return response;
 };
+
+export type refreshRequestProps = {
+  refreshToken: string;
+};
+
+export type refreshResponseProps = {
+  accessToken: string;
+};
+
+export const refresh = async (data: refreshRequestProps) => {
+  const response: ApiResponse<refreshResponseProps> = await instance.post(
+    "/refresh-token",
+    data
+  );
+  return response;
+};

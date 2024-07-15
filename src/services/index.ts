@@ -49,9 +49,12 @@ instance.interceptors.response.use(
     const { refresh } = useRefresh();
 
     if (response.status === 401 || response.status === 403) {
-      await refresh(); // Call refresh if access token is expired
-      return instance.request(config);
+      if (window.location.pathname !== "/auth") {
+        await refresh(); // Call refresh if access token is expired and url !== auth
+        return instance.request(config);
+      }
     }
+
     const error_response: ErrorResponse = {
       status: response.status,
       error: response.data.error,

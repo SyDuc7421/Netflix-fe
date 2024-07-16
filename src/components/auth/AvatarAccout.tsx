@@ -1,17 +1,23 @@
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AAccountProps {
   label: string;
   url?: string;
-  onClick: () => void;
+  accountId: string;
 }
 
-export const AAccount = ({ label, url, onClick }: AAccountProps) => {
+export const AAccount = ({ label, url, accountId }: AAccountProps) => {
+  const navigate = useNavigate();
+  const chooseAccount = useCallback(() => {
+    console.log("move to account: ", accountId);
+    navigate("/homepage");
+  }, []);
   return (
     <div
       className="group flex flex-col items-center justify-center gap-2 text-center"
-      onClick={onClick}
+      onClick={chooseAccount}
     >
       <img
         src={url ? url : "/src/assets/images/default-blue.png"}

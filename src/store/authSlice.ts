@@ -4,7 +4,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 const AUTH_SLICE_STORE_KEY = "NETFLIX_CLONE_AUTH_SLICE_STORE_KEY";
 
 export interface AuthState {
-  username: string;
   email: string;
   accessToken: string;
   refreshToken: string;
@@ -12,7 +11,6 @@ export interface AuthState {
 
 const stored = localStorage.getItem(AUTH_SLICE_STORE_KEY);
 let initialState: AuthState = {
-  username: "",
   email: "",
   accessToken: "",
   refreshToken: "",
@@ -26,7 +24,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<AuthState>) => {
-      state.username = action.payload.username;
       state.email = action.payload.email;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
@@ -34,15 +31,13 @@ export const authSlice = createSlice({
       localStorage.setItem(
         AUTH_SLICE_STORE_KEY,
         JSON.stringify({
-          username: action.payload.username,
           email: action.payload.email,
           accessToken: action.payload.accessToken,
           refreshToken: action.payload.refreshToken,
-        })
+        }),
       );
     },
     remove: (state) => {
-      state.username = "";
       state.email = "";
       state.accessToken = "";
       state.refreshToken = "";
@@ -53,7 +48,7 @@ export const authSlice = createSlice({
           email: "",
           accessToken: "",
           refreshToken: "",
-        })
+        }),
       );
     },
     refresh: (state, action: PayloadAction<string>) => {

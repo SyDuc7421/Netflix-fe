@@ -1,17 +1,22 @@
-import { useCurrentUser } from "../hooks/userHooks";
+import { useCallback, useEffect } from "react";
+
 import { AAccount, AddAccount } from "../components/auth/AvatarAccout";
 import { EditAccountDialog } from "../components/account-dialog";
-import { useCallback } from "react";
+
+import { useAccounts, useCreateAccount } from "../hooks/accountHook";
 
 const ChooseAccountPage = () => {
-  const { username } = useCurrentUser();
-  // TODO: Call API get all account and display on screen
+  const { data: accounts, query: getAccounts } = useAccounts();
+  const { mutation: createAccount } = useCreateAccount();
 
-  const onCreateAnAccount = useCallback((value: string) => {
-    console.log(value);
-    // TODO: Call API create account
+  const onCreateAnAccount = useCallback(async (value: string) => {
+    await createAccount({ accountName: value });
   }, []);
-  const onMoveOnAccount = useCallback(() => {}, []);
+
+  // Get all account data of user.
+  useEffect(() => {
+    getAccounts();
+  }, []);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-8 bg-primary text-primary-foreground">
@@ -19,14 +24,20 @@ const ChooseAccountPage = () => {
       <div className="grid grid-cols-2 items-stretch justify-center justify-items-center gap-6 lg:grid-cols-3">
         <EditAccountDialog
           label="Create an account"
-          description="For the best experience, create a personal account that suits your interests"
+          description="For the best experience, create a personal account that suits your interests."
           action="Add an account"
           onSave={onCreateAnAccount}
         >
           <AddAccount />
         </EditAccountDialog>
-
-        <AAccount label={username} onClick={onMoveOnAccount} />
+        {accounts &&
+          accounts.map((account) => (
+            <AAccount
+              key={account._id}
+              label={account.name}
+              accountId={account._id}
+            />
+          ))}
       </div>
     </div>
   );

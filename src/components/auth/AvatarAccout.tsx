@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import React from "react";
 
 interface AAccountProps {
   label: string;
@@ -24,17 +25,21 @@ export const AAccount = ({ label, url, onClick }: AAccountProps) => {
   );
 };
 
-interface AddAccoutProps {
-  onClick: () => void;
-}
+type AddAccountProps = {};
 
-export const AddAccount = ({ onClick }: AddAccoutProps) => {
-  return (
-    <div
-      className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-md border-2 border-zinc-500 hover:border-white"
-      onClick={onClick}
-    >
-      <Plus size={52} strokeWidth={1} className="-ms-3" />
-    </div>
-  );
-};
+const AddAccount = React.forwardRef<HTMLLabelElement, AddAccountProps>(
+  (props, ref: React.Ref<HTMLLabelElement>) => {
+    return (
+      <label
+        ref={ref}
+        {...props}
+        className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-md border-2 border-zinc-500 hover:border-white"
+      >
+        <Plus size={52} strokeWidth={1} className="-ms-3" />
+      </label>
+    );
+  },
+);
+
+AddAccount.displayName = "AddAccountIcon";
+export { AddAccount };

@@ -1,6 +1,10 @@
-import { Plus } from "lucide-react";
 import React, { useCallback } from "react";
+
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { Plus } from "lucide-react";
+import { addAccoutId } from "../../store/accountSlice";
 
 interface AAccountProps {
   label: string;
@@ -10,10 +14,13 @@ interface AAccountProps {
 
 export const AAccount = ({ label, url, accountId }: AAccountProps) => {
   const navigate = useNavigate();
+  const dispath = useDispatch();
+
   const chooseAccount = useCallback(() => {
-    console.log("move to account: ", accountId);
+    dispath(addAccoutId(accountId));
     navigate("/homepage");
   }, []);
+
   return (
     <div
       className="group flex flex-col items-center justify-center gap-2 text-center"
@@ -48,4 +55,5 @@ const AddAccount = React.forwardRef<HTMLLabelElement, AddAccountProps>(
 );
 
 AddAccount.displayName = "AddAccountIcon";
+
 export { AddAccount };

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { AAccount, AddAccount } from "../components/auth/AvatarAccout";
 import { EditAccountDialog } from "../components/account-dialog";
@@ -6,17 +6,25 @@ import { EditAccountDialog } from "../components/account-dialog";
 import { useAccounts, useCreateAccount } from "../hooks/accountHook";
 
 const ChooseAccountPage = () => {
-  const { data: accounts, query: getAccounts } = useAccounts();
-  const { mutation: createAccount } = useCreateAccount();
+  const [refresh, setRefresh] = useState(0);
 
-  const onCreateAnAccount = useCallback(async (value: string) => {
-    await createAccount({ accountName: value });
-  }, []);
+  const { data: accounts, query: getAccounts } = useAccounts();
+  const { data: newAccount, mutation: createAccount } = useCreateAccount();
+
+  const onCreateAnAccount = useCallback(
+    async (value: string) => {
+      await createAccount({ accountName: value });
+      if (newAccount) {
+        setRefresh((prev) => prev + 1);
+      }
+    },
+    [createAccount, newAccount],
+  );
 
   // Get all account data of user.
   useEffect(() => {
     getAccounts();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-8 bg-primary text-primary-foreground">

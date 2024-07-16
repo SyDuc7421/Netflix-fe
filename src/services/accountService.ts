@@ -9,7 +9,7 @@ export type accountResponseProps = {
   userId: string;
   accountName: string;
   type: string;
-  favorites: string[];
+  favorites: { movieId: string }[];
 };
 
 export const createAccount = async (data: createAccountRequestProps) => {
@@ -35,7 +35,7 @@ type getAccoutByIDProps = {
   accountId: string;
 };
 
-export const getAccountByID = async (data: getAccoutByIDProps) => {
+export const getAccountById = async (data: getAccoutByIDProps) => {
   const response: ApiResponse<accountResponseProps> = await axios.get(
     `/account/${data.accountId}`,
   );

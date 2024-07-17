@@ -1,10 +1,12 @@
 import React, { useCallback } from "react";
 
+import { Plus } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { Plus } from "lucide-react";
-import { addAccoutId } from "../../store/accountSlice";
+import { addAccoutId, getAccountByIdThunk } from "../../store/accountSlice";
+import { AppDispatch } from "../../store/store";
 
 interface AAccountProps {
   label: string;
@@ -14,10 +16,12 @@ interface AAccountProps {
 
 export const AAccount = ({ label, url, accountId }: AAccountProps) => {
   const navigate = useNavigate();
-  const dispath = useDispatch();
+  const dispath: AppDispatch = useDispatch();
 
   const chooseAccount = useCallback(() => {
     dispath(addAccoutId(accountId));
+    dispath(getAccountByIdThunk({ accountId }));
+
     navigate("/homepage");
   }, []);
 

@@ -9,7 +9,7 @@ export const RootLayout = () => {
     return <Navigate to="/auth" replace />;
   } else {
     return (
-      <div className="w-screen h-screen">
+      <div className="h-screen w-screen">
         <Outlet />
       </div>
     );

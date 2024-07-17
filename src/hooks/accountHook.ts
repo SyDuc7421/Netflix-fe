@@ -3,7 +3,6 @@ import {
   accountResponseProps,
   createAccount,
   createAccountRequestProps,
-  getAccountById,
   getAccounts,
   getAccountsResponseProps,
 } from "../services/accountService";
@@ -59,24 +58,5 @@ export const useCreateAccount = () => {
     isSuccess,
     data: accountInfo,
     mutation: createNewAccountRequest,
-  };
-};
-
-export const useAccountById = () => {
-  const [accountInfo, setAccoutInfo] = useState<accountResponseProps>();
-  const getAccountByIdRequest = async (accountId: string) => {
-    try {
-      const response = await getAccountById({ accountId });
-      if (response && response.status === 200) {
-        setAccoutInfo(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return {
-    data: accountInfo,
-    query: getAccountByIdRequest,
   };
 };

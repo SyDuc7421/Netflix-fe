@@ -31,7 +31,7 @@ export const getAccounts = async () => {
   return response;
 };
 
-type getAccoutByIDProps = {
+export type getAccoutByIDProps = {
   accountId: string;
 };
 

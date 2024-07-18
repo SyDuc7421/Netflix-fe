@@ -30,6 +30,11 @@ export const EditAccountDialog = ({
 }: EditAccountDialogProps) => {
   const [accountName, setAccountName] = useState<string>("");
 
+  const onSubmit = (value: string) => {
+    onSave(value);
+    setAccountName("");
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -48,7 +53,7 @@ export const EditAccountDialog = ({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit" onClick={() => onSave(accountName)}>
+            <Button type="submit" onClick={() => onSubmit(accountName)}>
               {action ? action : "Save changes"}
             </Button>
           </DialogClose>

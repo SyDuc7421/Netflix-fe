@@ -1,0 +1,51 @@
+import { useEffect } from "react";
+import { useMovies } from "../hooks/movieHook";
+import { Button } from "./ui/button";
+import { Info, Play } from "lucide-react";
+
+export const Billboard = () => {
+  const { data: movies, query: fetchMovies } = useMovies();
+  const randomMovie = movies[Math.floor(movies.length * Math.random())];
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+  return (
+    <div className="relative h-[56.25vw] w-full">
+      <video
+        // src={randomMovie?.videoUrl}
+        poster={randomMovie?.thumbnailUrl}
+        loop
+        autoPlay
+        muted
+        className="h-[56.25vw] w-full object-cover brightness-75"
+      />
+      <div className="absolute left-[7%] top-[30%] flex flex-col gap-8">
+        <h1 className="text-1xl w-1/2 font-bold text-white md:text-4xl lg:text-6xl">
+          {randomMovie?.title}
+        </h1>
+        <span className="tex-base w-3/4 font-normal md:text-xl lg:w-1/2 lg:text-2xl">
+          {randomMovie?.description}
+        </span>
+        <div className="flex items-center gap-6">
+          <Button
+            className="flex items-center gap-2"
+            size="lg"
+            variant="secondary"
+          >
+            <Play />
+            <span className="text-xl font-semibold">Play</span>
+          </Button>
+          <Button
+            className="flex items-center gap-2 bg-primary/70"
+            size="lg"
+            variant="default"
+          >
+            <Info />
+            <span className="text-xl font-semibold">More info</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

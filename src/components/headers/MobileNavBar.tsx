@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronDown, Columns3, Film, Home, Popcorn, Star } from "lucide-react";
+
+import { cn } from "../../lib/utils";
 
 import { Button } from "../ui/button";
 import {
@@ -10,16 +13,22 @@ import {
 } from "../ui/dropdown-menu";
 
 export const MobileNavBar = () => {
+  const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={(open) => setOpen(open)}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           className="flex items-center gap-2 text-primary-foreground/50 transition duration-500 hover:bg-transparent hover:text-primary-foreground lg:hidden"
         >
           <span>Browser</span>
-          <ChevronDown />
+          <ChevronDown
+            className={cn(
+              "transition duration-500",
+              open ? "rotate-180" : "rotate-0",
+            )}
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" sideOffset={18} className="space-y-1">

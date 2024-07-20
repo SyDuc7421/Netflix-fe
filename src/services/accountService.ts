@@ -1,4 +1,4 @@
-import axios, { ApiResponse } from "../services/index";
+import axios, { ApiResponse } from "./index";
 
 export type createAccountRequestProps = {
   accountName: string;

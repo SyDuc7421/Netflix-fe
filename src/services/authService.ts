@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiResponse, ErrorResponse } from ".";
+import { ApiResponse, ErrorResponse } from "./index";
 
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_BASE_URL}/api/auth`,
@@ -22,7 +22,7 @@ instance.interceptors.response.use(
       message: response.data.message,
     };
     return error_response;
-  }
+  },
 );
 
 // sign in API
@@ -41,7 +41,7 @@ export type signInResponseProps = {
 export const signin = async (data: signInRequestProps) => {
   const response: ApiResponse<signInResponseProps> = await instance.post(
     "/sign-in",
-    data
+    data,
   );
   return response;
 };
@@ -61,7 +61,7 @@ export type signUpResponseProps = {
 export const signup = async (data: signUpRequestProps) => {
   const response: ApiResponse<signUpResponseProps> = await instance.post(
     "/sign-up",
-    data
+    data,
   );
   return response;
 };
@@ -77,7 +77,7 @@ export type refreshResponseProps = {
 export const refresh = async (data: refreshRequestProps) => {
   const response: ApiResponse<refreshResponseProps> = await instance.post(
     "/refresh-token",
-    data
+    data,
   );
   return response;
 };

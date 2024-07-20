@@ -8,10 +8,6 @@ export const RootLayout = () => {
   if (!isAutheticated) {
     return <Navigate to="/auth" replace />;
   } else {
-    return (
-      <div className="h-screen w-screen">
-        <Outlet />
-      </div>
-    );
+    return <Outlet />;
   }
 };

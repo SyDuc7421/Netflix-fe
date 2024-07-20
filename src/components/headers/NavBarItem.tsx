@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 
-interface WindownNavBarItemProps {
+interface NavBarItemProps {
   label: string;
   url?: string;
 }
@@ -9,7 +9,7 @@ interface WindownNavBarItemProps {
 export const WindownNavBarItem = ({
   label,
   url = "/homepage",
-}: WindownNavBarItemProps) => {
+}: NavBarItemProps) => {
   const navigate = useNavigate();
   return (
     <Button

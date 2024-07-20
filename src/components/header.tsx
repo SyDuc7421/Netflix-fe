@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { UserProfile } from "./auth/UserProifle";
-import { NotifyButton, SearchButton } from "./headers/HeadersButton";
-import { WindownNavBarItem } from "./headers/NavBarItem";
 import { cn } from "../lib/utils";
+import { UserProfile } from "./auth/UserProifle";
+
+import { NotifyButton, SearchButton } from "./headers/HeadersButton";
+import { MobileNavBar } from "./headers/MobileNavBar";
+import { WindownNavBar } from "./headers/WindownNavBar";
 
 const TOP_OFFSET = 68;
 
@@ -25,7 +27,7 @@ export const Headers = () => {
   return (
     <div
       className={cn(
-        "fixed z-40 flex w-full flex-row items-center justify-between px-4 py-6 text-primary-foreground opacity-90 transition duration-500",
+        "fixed z-40 flex h-16 w-full flex-row items-center justify-between px-4 py-6 text-primary-foreground opacity-90 transition duration-500",
         showBackground ? "bg-primary" : "bg-transparent",
       )}
     >
@@ -33,15 +35,10 @@ export const Headers = () => {
         <img
           src="/src/assets/images/logo.png"
           alt="Logo"
-          className="h-4 lg:h-7"
+          className="h-5 lg:h-7"
         />
-        <div className="flex flex-row items-center gap-4">
-          <WindownNavBarItem label="Home" />
-          <WindownNavBarItem label="Series" />
-          <WindownNavBarItem label="Films" />
-          <WindownNavBarItem label="New & Popular" />
-          <WindownNavBarItem label="My Favorites" url="/favorites" />
-        </div>
+        <WindownNavBar />
+        <MobileNavBar />
       </div>
       <div className="flex flex-row items-center gap-6">
         <SearchButton />

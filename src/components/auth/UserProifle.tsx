@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { LogOut, Mail, Settings, Star, User } from "lucide-react";
+import { ChevronDown, LogOut, Mail, Settings, Star, User } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,22 +14,32 @@ import {
 
 import { useCurrentUser } from "../../hooks/userHooks";
 import { useLogout } from "../../hooks/authHook";
+import { cn } from "../../lib/utils";
 
 export const UserProfile = () => {
   const { username, email } = useCurrentUser();
   const { logoutFunction: logout } = useLogout();
 
+  const [open, setOpen] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={(open) => setOpen(open)}>
       <DropdownMenuTrigger>
-        <Avatar>
-          <AvatarImage src="" alt="@avatar" />
-          <AvatarFallback className="bg-primary-foreground font-bold text-primary hover:opacity-85">
-            {username.split("")[0]}
-          </AvatarFallback>
-        </Avatar>
+        <div className="group flex items-center gap-1">
+          <img
+            src="/src/assets/images/default-blue.png"
+            alt="@avatar"
+            className="h-8 w-8 cursor-pointer rounded-sm border border-transparent opacity-85 transition duration-500 group-hover:border-white group-hover:opacity-100 lg:h-10 lg:w-10"
+          />
+          <ChevronDown
+            className={cn(
+              "text-primary-foreground/50 transition duration-500 group-hover:text-primary-foreground",
+              open ? "rotate-180" : "rotate-0",
+            )}
+          />
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" sideOffset={12} align="end">
         <DropdownMenuLabel>Welcome, {username}</DropdownMenuLabel>

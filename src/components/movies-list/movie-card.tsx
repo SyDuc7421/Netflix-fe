@@ -1,21 +1,36 @@
-import { ChevronDown, Play, Plus, ThumbsDown, ThumbsUp } from "lucide-react";
-import { movieResponseProps } from "../../services/movieService";
-import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
-import { useAddFavorite } from "../../hooks/accountHook";
-
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
+import {
+  ChevronDown,
+  Minus,
+  Play,
+  Plus,
+  ThumbsDown,
+  ThumbsUp,
+} from "lucide-react";
+import { movieResponseProps } from "../../services/movieService";
+import { Button } from "../ui/button";
+
 interface MovieCardProps {
   info: movieResponseProps;
+  isFavorite: boolean;
+  onToggleFavorite: (
+    accountId: string,
+    movieId: string,
+    isFavorite: boolean,
+  ) => void;
 }
 
-export const MovieCard = ({ info }: MovieCardProps) => {
+export const MovieCard = ({
+  info,
+  isFavorite,
+  onToggleFavorite,
+}: MovieCardProps) => {
   const navigate = useNavigate();
 
   const accountId = useSelector((state: RootState) => state.account._id);
-  const { mutate: addFavoriteMovie } = useAddFavorite();
 
   return (
     <div className="group relative h-[12vw]">
@@ -46,10 +61,10 @@ export const MovieCard = ({ info }: MovieCardProps) => {
                 variant="secondary"
                 className="rounded-full"
                 onClick={() =>
-                  addFavoriteMovie({ accountId, movieId: info._id })
+                  onToggleFavorite(accountId, info._id, isFavorite)
                 }
               >
-                <Plus />
+                {isFavorite ? <Minus /> : <Plus />}
               </Button>
               <Button
                 size="icon"

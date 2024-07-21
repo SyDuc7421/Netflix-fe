@@ -54,7 +54,17 @@ export type addFavoriteResponseProps = {
 
 export const addFavoriteMovie = async (data: addFavoriteRequestProps) => {
   const response: ApiResponse<addFavoriteResponseProps> = await axios.patch(
-    `/account/${data.accountId}`,
+    `/account/${data.accountId}/favorite`,
+    {
+      movieId: data.movieId,
+    },
+  );
+  return response;
+};
+
+export const removeFavoriteMovie = async (data: addFavoriteRequestProps) => {
+  const response: ApiResponse<addFavoriteResponseProps> = await axios.patch(
+    `/account/${data.accountId}/unfavorite`,
     {
       movieId: data.movieId,
     },

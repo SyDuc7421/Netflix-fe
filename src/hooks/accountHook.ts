@@ -9,6 +9,7 @@ import {
   getAccounts,
   getAccountsResponseProps,
   getFavorites,
+  removeFavoriteMovie,
 } from "../services/accountService";
 import { toast } from "sonner";
 import { store } from "../store/store";
@@ -115,6 +116,29 @@ export const useAddFavorite = () => {
   };
 };
 
+export const useRemoveFavorite = () => {
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const removeFavoriteMovieRequest = async (data: addFavoriteRequestProps) => {
+    try {
+      const response = await removeFavoriteMovie(data);
+      if (response && response.status === 200) {
+        setIsSuccess(true);
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.toString());
+    }
+  };
+
+  return {
+    isSuccess,
+    mutate: removeFavoriteMovieRequest,
+  };
+};
+
 export const useFavorite = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [movies, setMovies] = useState<movieResponseProps[]>([]);
@@ -123,7 +147,6 @@ export const useFavorite = () => {
     try {
       const response = await getFavorites(accountId);
       if (response && response.status === 200) {
-        console.log(response.data);
         setIsSuccess(true);
         setMovies(response.data);
       }

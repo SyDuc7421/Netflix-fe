@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { useMovies } from "../hooks/movieHook";
-import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 import { Info, Play } from "lucide-react";
 
+import { useMovies } from "../hooks/movieHook";
+import { Button } from "./ui/button";
+
 export const Billboard = () => {
+  const navigate = useNavigate();
   const { data: movies, query: fetchMovies } = useMovies();
   const randomMovie = movies[Math.floor(movies.length * Math.random())];
 
@@ -29,6 +32,7 @@ export const Billboard = () => {
             className="flex items-center gap-2"
             size="lg"
             variant="secondary"
+            onClick={() => navigate(`/watch/${randomMovie._id}`)}
           >
             <Play />
             <span className="text-xl font-semibold">Play</span>

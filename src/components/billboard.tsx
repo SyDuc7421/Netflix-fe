@@ -11,13 +11,10 @@ export const Billboard = () => {
     fetchMovies();
   }, []);
   return (
-    <div className="relative h-[56.25vw] w-full">
-      <video
-        // src={randomMovie?.videoUrl}
-        poster={randomMovie?.thumbnailUrl}
-        loop
-        autoPlay
-        muted
+    <div className="relative aspect-video h-[56.25vw] w-full">
+      <img
+        src={randomMovie?.thumbnailUrl}
+        alt="Thumbnail"
         className="h-[56.25vw] w-full object-cover brightness-75"
       />
       <div className="absolute left-[7%] top-[30%] flex flex-col gap-8">

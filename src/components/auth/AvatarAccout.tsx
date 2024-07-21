@@ -21,7 +21,6 @@ export const AAccount = ({ label, url, accountId }: AAccountProps) => {
   const chooseAccount = useCallback(() => {
     dispath(addAccoutId(accountId));
     dispath(getAccountByIdThunk({ accountId }));
-
     navigate("/homepage");
   }, []);
 

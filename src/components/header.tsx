@@ -12,7 +12,6 @@ export const Headers = () => {
   const [showBackground, setShowBackground] = useState<boolean>(false);
   useEffect(() => {
     const handleScroll = () => {
-      console.log(scrollY);
       if (window.scrollY >= TOP_OFFSET) {
         setShowBackground(true);
       } else {

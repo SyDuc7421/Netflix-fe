@@ -14,6 +14,7 @@ import { RootLayout } from "./layouts/RootLayout";
 import { AuthLayout } from "./layouts/AuthLayout";
 
 import { Toaster } from "./components/ui/sonner";
+import WatchPage from "./pages/Watch";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "choosing-account",
         element: <ChooseAccountPage />,
+      },
+      {
+        path: "watch/:movieId",
+        element: <WatchPage />,
       },
     ],
   },

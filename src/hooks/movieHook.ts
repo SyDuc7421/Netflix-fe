@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { getMovies, movieResponseProps } from "../services/movieService";
+import {
+  getMovieById,
+  getMovies,
+  movieResponseProps,
+} from "../services/movieService";
 
 export const useMovies = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -19,5 +23,26 @@ export const useMovies = () => {
     isSuccess,
     data: movies,
     query: getMoviesRequest,
+  };
+};
+
+export const useMovie = () => {
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [movie, setMovie] = useState<movieResponseProps>();
+  const getMovieRequest = async (movieId: string) => {
+    const response = await getMovieById(movieId);
+    if (response && response.status === 200) {
+      setIsSuccess(true);
+      setMovie(response.data);
+    }
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return {
+    isSuccess,
+    data: movie,
+    query: getMovieRequest,
   };
 };

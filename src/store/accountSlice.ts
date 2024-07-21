@@ -7,6 +7,8 @@ import {
   getAccoutByIDProps,
 } from "../services/accountService";
 
+const ACCOUNT_SLICE_STORE_KEY = "NETFLIX_CLONE_ACCOUNT_SLICE_STORE_KEY";
+
 export interface AccountState {
   _id: string;
   userId: string;
@@ -14,12 +16,16 @@ export interface AccountState {
   favorites: { movieId: string }[];
 }
 
-const initialState: AccountState = {
+let initialState: AccountState = {
   _id: "",
   userId: "",
   accountName: "",
   favorites: [],
 };
+const stored = sessionStorage.getItem(ACCOUNT_SLICE_STORE_KEY);
+if (stored) {
+  initialState = JSON.parse(stored);
+}
 
 export const getAccountByIdThunk = createAsyncThunk<
   accountResponseProps,
@@ -43,12 +49,39 @@ export const accountSlice = createSlice({
       state.userId = action.payload.userId;
       state.accountName = action.payload.accountName;
       state.favorites = action.payload.favorites;
+      sessionStorage.setItem(
+        ACCOUNT_SLICE_STORE_KEY,
+        JSON.stringify({
+          _id: action.payload._id,
+          userId: action.payload.userId,
+          accountName: action.payload.accountName,
+          favorites: action.payload.favorites,
+        }),
+      );
     },
     remove: (state) => {
       state = initialState;
+      sessionStorage.setItem(
+        ACCOUNT_SLICE_STORE_KEY,
+        JSON.stringify({
+          _id: "",
+          userId: "",
+          accountName: "",
+          favorites: "",
+        }),
+      );
     },
     addAccoutId: (state, action: PayloadAction<string>) => {
       state._id = action.payload;
+      sessionStorage.setItem(
+        ACCOUNT_SLICE_STORE_KEY,
+        JSON.stringify({
+          _id: action.payload,
+          userId: "",
+          accountName: "",
+          favorites: "",
+        }),
+      );
     },
   },
   extraReducers(builder) {

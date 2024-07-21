@@ -14,3 +14,10 @@ export const getMovies = async () => {
   const response: ApiResponse<movieResponseProps[]> = await axios.get("/movie");
   return response;
 };
+
+export const getMovieById = async (movieId: string) => {
+  const response: ApiResponse<movieResponseProps> = await axios.get(
+    `/movie/${movieId}`,
+  );
+  return response;
+};

@@ -4,6 +4,7 @@ import { Info, Play } from "lucide-react";
 
 import { useMovies } from "../hooks/movieHook";
 import { Button } from "./ui/button";
+import { MovieDialog } from "./movie-model";
 
 export const Billboard = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const Billboard = () => {
         alt="Thumbnail"
         className="h-[56.25vw] w-full object-cover brightness-75"
       />
-      <div className="absolute left-[7%] top-[30%] flex flex-col gap-8">
+      <div className="absolute left-[7%] top-[50%] flex flex-col gap-8">
         <h1 className="text-1xl w-1/2 font-bold text-white md:text-4xl lg:text-6xl">
           {randomMovie?.title}
         </h1>
@@ -32,19 +33,21 @@ export const Billboard = () => {
             className="flex items-center gap-2"
             size="lg"
             variant="secondary"
-            onClick={() => navigate(`/watch/${randomMovie._id}`)}
+            onClick={() => navigate(`/watch/${randomMovie?._id}`)}
           >
             <Play />
             <span className="text-xl font-semibold">Play</span>
           </Button>
-          <Button
-            className="flex items-center gap-2 bg-primary/70"
-            size="lg"
-            variant="default"
-          >
-            <Info />
-            <span className="text-xl font-semibold">More info</span>
-          </Button>
+          <MovieDialog movieInfo={randomMovie}>
+            <Button
+              className="flex items-center gap-2 bg-primary/70"
+              size="lg"
+              variant="default"
+            >
+              <Info />
+              <span className="text-xl font-semibold">More info</span>
+            </Button>
+          </MovieDialog>
         </div>
       </div>
     </div>

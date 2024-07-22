@@ -10,7 +10,7 @@ export type accountResponseProps = {
   userId: string;
   accountName: string;
   type: string;
-  favorites: { movieId: string }[];
+  favorites: string[];
 };
 
 export const createAccount = async (data: createAccountRequestProps) => {

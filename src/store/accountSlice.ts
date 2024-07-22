@@ -13,7 +13,7 @@ export interface AccountState {
   _id: string;
   userId: string;
   accountName: string;
-  favorites: { movieId: string }[];
+  favorites: string[];
 }
 
 let initialState: AccountState = {
@@ -67,7 +67,7 @@ export const accountSlice = createSlice({
           _id: "",
           userId: "",
           accountName: "",
-          favorites: "",
+          favorites: [],
         }),
       );
     },

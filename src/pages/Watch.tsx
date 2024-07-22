@@ -14,7 +14,7 @@ const WatchPage = () => {
     if (movieId) {
       fetchMovieById(movieId);
     }
-  });
+  }, []);
   return (
     <div className="h-screen w-screen overflow-hidden bg-primary">
       <div className="fixed top-4 z-50 flex w-full items-center gap-4 px-4 text-primary-foreground">

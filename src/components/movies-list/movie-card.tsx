@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { movieResponseProps } from "../../services/movieService";
 import { Button } from "../ui/button";
+import { MovieDialog } from "../movie-model";
+import { Hint } from "../hint";
 
 interface MovieCardProps {
   info: movieResponseProps;
@@ -48,14 +50,16 @@ export const MovieCard = ({
         <div className="flex flex-col gap-2 rounded-b-sm bg-slate-800 p-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Button
-                size="icon"
-                variant="secondary"
-                className="rounded-full"
-                onClick={() => navigate(`/watch/${info._id}`)}
-              >
-                <Play />
-              </Button>
+              <Hint label="Play it now" sideOffset={12} align="start">
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="rounded-full"
+                  onClick={() => navigate(`/watch/${info._id}`)}
+                >
+                  <Play />
+                </Button>
+              </Hint>
               <Button
                 size="icon"
                 variant="secondary"
@@ -64,26 +68,47 @@ export const MovieCard = ({
                   onToggleFavorite(accountId, info._id, isFavorite)
                 }
               >
-                {isFavorite ? <Minus /> : <Plus />}
+                {isFavorite ? (
+                  <Hint
+                    label="Remove to favorites"
+                    sideOffset={18}
+                    align="start"
+                  >
+                    <Minus />
+                  </Hint>
+                ) : (
+                  <Hint label="Add to favorites" sideOffset={18} align="start">
+                    <Plus />
+                  </Hint>
+                )}
               </Button>
-              <Button
-                size="icon"
-                variant="secondary"
-                className="invisible hidden items-center justify-center rounded-full group-hover:flex xl:visible"
-              >
-                <ThumbsUp />
-              </Button>
-              <Button
-                size="icon"
-                variant="secondary"
-                className="invisible hidden items-center justify-center rounded-full group-hover:flex xl:visible"
-              >
-                <ThumbsDown />
-              </Button>
+              <Hint label="Like a movie" sideOffset={12}>
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="invisible hidden items-center justify-center rounded-full group-hover:flex xl:visible"
+                >
+                  <ThumbsUp />
+                </Button>
+              </Hint>
+              <Hint label="Unlike a movie" sideOffset={12}>
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="invisible hidden items-center justify-center rounded-full group-hover:flex xl:visible"
+                >
+                  <ThumbsDown />
+                </Button>
+              </Hint>
             </div>
-            <Button size="icon" variant="secondary" className="rounded-full">
-              <ChevronDown />
-            </Button>
+
+            <MovieDialog movieInfo={info}>
+              <Button size="icon" variant="secondary" className="rounded-full">
+                <Hint label="More info" sideOffset={18} align="end">
+                  <ChevronDown />
+                </Hint>
+              </Button>
+            </MovieDialog>
           </div>
           <div className="flex flex-col justify-start gap-[2px]">
             <h1 className="text-base font-semibold tracking-tight lg:text-xl">

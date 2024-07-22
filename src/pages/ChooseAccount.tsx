@@ -4,6 +4,7 @@ import { AAccount, AddAccount } from "../components/auth/AvatarAccout";
 import { EditAccountDialog } from "../components/account-dialog";
 
 import { useAccounts, useCreateAccount } from "../hooks/accountHook";
+import { Hint } from "../components/hint";
 
 const ChooseAccountPage = () => {
   const [refresh, setRefresh] = useState(0);
@@ -37,7 +38,9 @@ const ChooseAccountPage = () => {
             action="Add an account"
             onSave={onCreateAnAccount}
           >
-            <AddAccount />
+            <Hint label="Add a new account" side="left">
+              <AddAccount />
+            </Hint>
           </EditAccountDialog>
         )}
 

@@ -60,7 +60,10 @@ export const accountSlice = createSlice({
       );
     },
     remove: (state) => {
-      state = initialState;
+      state._id = "";
+      state.accountName = "";
+      state.userId = "";
+      state.favorites = [];
       sessionStorage.setItem(
         ACCOUNT_SLICE_STORE_KEY,
         JSON.stringify({
